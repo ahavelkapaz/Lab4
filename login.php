@@ -74,7 +74,7 @@ if(mysqli_num_rows($users) > 0)
 		
 		echo "Bienvenido! " . $_SESSION['user'];
 		mysqli_close($conn); 
-		header("Location: verPreguntas.php");
+		header("Location: login.php");
  
     exit(); 
 }
@@ -83,7 +83,7 @@ else
 {
 
    $mensajeaccesoincorrecto = "El usuario y la contraseña son incorrectos, por favor vuelva a introducirlos.";
-   echo $mensajeaccesoincorrecto; 
+   echo $mensajeaccesoincorrecto . '<a href="registro.html">Registrate</a>'; 
 }
 
 mysqli_close($conn); 

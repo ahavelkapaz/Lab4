@@ -15,7 +15,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
    echo "<br><a href='login.php'>Login</a>";
    echo "<br><br><a href='registro.html'>Registrarme</a>";
 
-exit;
+exit();
 }
 
 $now = time();

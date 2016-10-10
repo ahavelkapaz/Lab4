@@ -1,3 +1,19 @@
+<?php
+
+session_start();
+
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+
+} else {
+   echo "Esta pagina es solo para usuarios registrados.<br>";
+   echo "<br><a href='login.php'>Login</a>";
+   echo "<br><br><a href='registro.html'>Registrarme</a>";
+
+exit();
+}
+?>
+
+
 <head>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -40,7 +56,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="selectrate">Select Basic</label>
+  <label class="col-md-4 control-label" for="selectrate">Complejidad</label>
   <div class="col-md-5">
     <select id="selectrate" name="selectrate" class="form-control">
       <option value="0">Sin Puntuar</option>
@@ -55,10 +71,10 @@
 
 <!-- Button (Double) -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="buttonreset">Double Button</label>
+  <label class="col-md-4 control-label" for="buttonreset"></label>
   <div class="col-md-8">
-    <button id="buttonreset" name="buttonreset" class="btn btn-danger">Reset</button>
-<input type="submit" id="registrarB" name="registrarB" value="Registrar Pregunta" class="btn btn-success">
+    <input type="reset" id="buttonreset" name="buttonreset" class="btn btn-danger" value="Restablecer">
+	<input type="submit" id="registrarB" name="registrarB" value="Registrar Pregunta" class="btn btn-success">
   </div>
 </div>
 
