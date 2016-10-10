@@ -3,9 +3,10 @@ session_start();
 
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 		echo 'Hola ' . $_SESSION['user'] . '<br>';
-    echo '<a href="verPreguntas.php">Ver preguntas</a><br>';
+		echo '<a href="verPreguntas.php">Ver preguntas</a><br>';
+		echo '<a href="register_quiz.php">Registrar una nueva pregunta</a><br>';
 		echo '<a href="logout.php">Cerrar Sesion</a>';
-exit();
+		exit();
 	}
 
 ?>

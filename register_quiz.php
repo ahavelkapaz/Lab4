@@ -31,8 +31,8 @@ exit();
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Email</label>  
-  <div class="col-md-4">
-  <input id="email" name="email" placeholder="@ikasle.ehu.es" class="form-control input-md" pattern ="([a-zA-Z]{2,})\d{3}@(ikasle\.){0,1}ehu\.(eus|es)" required="" type="text">
+  <div class="col-md-4">  
+  <input id="email" name="email" value="<?php echo $_SESSION['user']; ?>" disabled class="form-control input-md" pattern ="([a-zA-Z]{2,})\d{3}@(ikasle\.){0,1}ehu\.(eus|es)" required="" type="text">
   <span class="help-block">Email del usuario</span>  
   </div>
 </div>
