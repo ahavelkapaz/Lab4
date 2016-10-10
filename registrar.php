@@ -4,6 +4,7 @@
 
 	$user_name = $_POST['nombre'];
 	$user_email = trim($_POST['email']);
+	$user_rol = htmlspecialchars($_POST['selectrol']);
 	$user_pass = trim($_POST['password']);//SHA1
 	$user_phone = trim($_POST['telefono']);
 	$user_speciality = htmlspecialchars($_POST['selectoptions']);
@@ -14,17 +15,24 @@
 	$user_tech= htmlspecialchars($_POST['tech']);
 	  
 	if(!preg_match('/^([a-zA-Z]+)\s([a-zA-Z]+)\s{0,1}([a-zA-Z]*)$/',$user_name)){
-		die('Eres un travieso, has cambiado el nombre');
+		die('El nomre recibido no se ajusta al formato establecido. <br><br><a href"registro.html">Vuelve a registrarte</a>');
 	}
 	if(!preg_match('/^([a-zA-Z]{2,})\d{3}@(ikasle\.){0,1}ehu\.(eus|es)$/',$user_email)){
-		die('Eres un travieso, has cambiado el correo');
+		die('El correo electrónico recibido no se ajusta al formato establecido. <br><br><a href"registro.html">Vuelve a registrarte</a>');
 	}
 	if(!preg_match('/^(\+[0-9]{2}){0,1}[0-9]{9,25}$/',$user_phone)){
-		die('Eres un travieso, has cambiado el telefono');
+		die('El número de teléfono recibido no se ajusta al formato establecido. <br><br><a href"registro.html">Vuelve a registrarte</a>');
 	}
 	if(!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*#?&]).{8,16}$/',$user_pass)){
-		die('Eres un travieso, has cambiado la contraseña');
+		die('La contraseña recibido no se ajusta al formato establecido. <br><br><a href"registro.html">Vuelve a registrarte</a>');
 	}
+	
+	//Lab4 Modo validaciones modo filter_var
+	if (!filter_var($user_email, FILTER_VALIDATE_EMAIL) === false) {
+		echo'';
+		} else {
+			die("$email is not a valid email address");
+		}
 	  
 
 	
@@ -42,7 +50,7 @@
 	
 	$time=date("Y-m-d H:i:s");
 	
-	$sql="INSERT INTO users(name,email,password,phone,department,tech_tools,avatar,date) VALUES('$user_name','$user_email','$user_pass','$user_phone','$user_speciality','$user_tech','$image','$time')";
+	$sql="INSERT INTO users(name,email,password,phone,department,tech_tools,avatar,date,role) VALUES('$user_name','$user_email','$user_pass','$user_phone','$user_speciality','$user_tech','$image','$time','$user_rol')";
 	/*$sql_check_mail="SELECT * from users where email='$user_email'";
 
 	$result = mysqli_query($conn,$sql_check_mail);
@@ -52,7 +60,7 @@
 	else{*/
 
 	if(!mysqli_query($conn,$sql)){
-		//die('Error' . mysqli_error($conn));
+		die('Error' . mysqli_error($conn));
 		die('Error Usuario ya Registrado');
 	}
 	else{ 

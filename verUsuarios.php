@@ -12,9 +12,9 @@
 	$result = mysqli_query($conn,$sql);
 
 	if ($result) {
-		echo '<table class="table table-bordered" > <tr> <th>Nombre y apellidos</th><th>E-mail</th><th>Teléfono</th><th>Fecha de registro</th><th>Especialidad</th><th>Tecnologías y herramientas de interés</th><th>Foto de perfil</th></td>';
+		echo '<table class="table table-bordered" > <tr> <th>Nombre y apellidos</th><th>E-mail</th><th>Teléfono</th><th>Fecha de registro</th><th>Especialidad</th><th>Tecnologías y herramientas de interés</th><th>Role</th><th>Foto de perfil</th></td>';
 		while ($row = mysqli_fetch_array( $result )) {
-			echo '<tr> <td>' . $row['name'] . '</td><td>' . $row['email'] . '</td><td>' . $row['phone'] . '</td><td>' . $row['date'] . '</td><td>' . $row['department'] . '</td><td>' . $row['tech_tools'] .'</td>'; 
+			echo '<tr> <td>' . $row['name'] . '</td><td>' . $row['email'] . '</td><td>' . $row['phone'] . '</td><td>' . $row['date'] . '</td><td>' . $row['department'] . '</td><td>' . $row['tech_tools'] .'</td><td>'. $row['role'] .'</td>'; 
 			echo '<td><img src="data:image/jpeg;base64,' . base64_encode($row['avatar']) . '" /></td></tr>';
 
 		}

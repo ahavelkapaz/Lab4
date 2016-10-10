@@ -35,10 +35,20 @@
 				<col width="80">
 				<td><img id="output" name="image2" style="max-height:500px;max-width:500px;width: expression(this.width > 500 ? 500: true);height: expression(this.height > 500 ? 500: true);"/></td>
 			</table>
-			
+			<table><tr>
+			<td>
 			<br> Dirección de correo(*):<br>
 			<input type="text" name="email" id="email" pattern ="([a-zA-Z]{2,})\d{3}@(ikasle\.){0,1}ehu\.(eus|es)" required title="El correo debe tener el formato de la UPV/EHU">
-			
+			</td><td>
+			<!-- Select Rol -->
+			<br><br>
+			  <label class="col-md-4 control-label" for="selectbasic">     Rol:</label>
+				<select id="selectrol" name="selectrol" class="form-control">
+				  <option value="alumno">Alumno</option>
+				  <option value="profesor">Profesor</option>
+				</select>
+			</td></tr></table>
+
 			<br> Password(*):<br>
 			<input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*#?&]).{8,16}" required
 			title="Formato mínimo => 1 mayúscula, 1 minúscula, 1 dígito y 1 Carácter especial. La longitud debe ser entre 8 y 16 caracteres.">
