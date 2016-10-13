@@ -1,16 +1,5 @@
 <?php
-
-session_start();
-
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-
-} else {
-   echo "Esta pagina es solo para usuarios registrados.<br>";
-   echo "<br><a href='login.php'>Login</a>";
-   echo "<br><br><a href='registro.html'>Registrarme</a>";
-
-exit();
-}
+include 'checklogin.php';
 ?>
 
 
@@ -31,7 +20,8 @@ exit();
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Email</label>  
-  <div class="col-md-4">  
+  <div class="col-md-4">
+  
   <input id="email" name="email" value="<?php echo $_SESSION['user']; ?>" disabled class="form-control input-md" pattern ="([a-zA-Z]{2,})\d{3}@(ikasle\.){0,1}ehu\.(eus|es)" required="" type="text">
   <span class="help-block">Email del usuario</span>  
   </div>
@@ -84,11 +74,11 @@ exit();
 
 <?php
 	
-if(isset($_REQUEST['email'])){
+if(isset($_REQUEST['question'])){
 
 	require_once 'db_config.php';
 
-	$user_email = $_REQUEST['email'];
+	$user_email = $_SESSION['user'];
 	$user_quiz = $_REQUEST['question'];
 	$user_answer = htmlspecialchars($_REQUEST['answer']);
 	$user_rate = htmlspecialchars($_REQUEST['selectrate']);

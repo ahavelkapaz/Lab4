@@ -4,7 +4,7 @@ session_start();
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 		echo 'Hola ' . $_SESSION['user'] . '<br>';
 		echo '<a href="verPreguntas.php">Ver preguntas</a><br>';
-		echo '<a href="register_quiz.php">Registrar una nueva pregunta</a><br>';
+		echo '<a href="insertarPregunta.php">Registrar una nueva pregunta</a><br>';
 		echo '<a href="logout.php">Cerrar Sesion</a>';
 		exit();
 	}
@@ -30,11 +30,11 @@ session_start();
                         <form class="form-inline" role="form" method="POST">
                              <div class="form-group">
                                 <label class="sr-only" for="Uemail">Email address</label>
-                                <input type="text" class="form-control" id="Uemail" name= "Uemail" placeholder="Email">
+                                <input type="text" class="form-control" id="Uemail" name= "Uemail" placeholder="Email"  pattern ="([a-zA-Z]{2,})\d{3}@(ikasle\.){0,1}ehu\.(eus|es)" required title="El correo debe tener el formato de la UPV/EHU"">
                               </div>                        
                              <div class="form-group">
                                 <label class="sr-only" for="Uemail">Password</label>
-                                <input type="password" class="form-control" id="Upassword" name= "Upassword" placeholder="Password">
+                                <input type="password" class="form-control" id="Upassword" name= "Upassword" placeholder="Password" required>
                               </div>
                               <button type="submit" class="btn btn-success">Login</button>
                         </form>                        
@@ -56,7 +56,7 @@ if(isset($_REQUEST['Uemail'])){
 
 //Recibimos las dos variables
 $usuario=mysqli_real_escape_string($conn,$_REQUEST["Uemail"]);
-$password=mysqli_real_escape_string($conn,$_REQUEST["Upassword"]);
+$password=mysqli_real_escape_string($conn,sha1($_REQUEST["Upassword"]));
 
 $users = mysqli_query($conn,"SELECT * FROM users WHERE email = '$usuario' AND password = '$password'");
 
@@ -75,7 +75,7 @@ if(mysqli_num_rows($users) > 0)
 		
 		echo "Bienvenido! " . $_SESSION['user'];
 		mysqli_close($conn); 
-		header("Location: login.php");
+		header("Location: insertarPregunta.php");
  
     exit(); 
 }
@@ -83,8 +83,9 @@ if(mysqli_num_rows($users) > 0)
 else 
 {
 
-   $mensajeaccesoincorrecto = "El usuario y la contraseña son incorrectos, por favor vuelva a introducirlos.";
-   echo $mensajeaccesoincorrecto . '<a href="registro.html">Registrate</a>'; 
+   $mensajeaccesoincorrecto = "El usuario o la contraseña son incorrectos, por favor vuelva a introducirlos.<br>";
+   echo $mensajeaccesoincorrecto . '<a href="registro.html">Registrate</a><br>'; 
+   echo '<a href="layout.html">Pagina de Inicio</a>'; 
 }
 
 mysqli_close($conn); 

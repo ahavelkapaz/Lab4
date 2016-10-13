@@ -28,7 +28,7 @@
 	}
 	
 
-
+	$user_pass=sha1($user_pass);
 	
 	$image="";
     //Añadir imagen
