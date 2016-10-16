@@ -19,11 +19,8 @@ include 'checklogin.php';
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Email</label>  
-  <div class="col-md-4">
-  
-  <input id="email" name="email" value="<?php echo $_SESSION['user']; ?>" disabled class="form-control input-md" pattern ="([a-zA-Z]{2,})\d{3}@(ikasle\.){0,1}ehu\.(eus|es)" required="" type="text">
-  <span class="help-block">Email del usuario</span>  
+ 
+  <h3><?php echo '- Hola ' . $_SESSION['user'] . '. Ingresa tu pregunta a registrar'; ?></h3>
   </div>
 </div>
 
@@ -67,9 +64,9 @@ include 'checklogin.php';
 	<input type="submit" id="registrarB" name="registrarB" value="Registrar Pregunta" class="btn btn-success">
   </div>
 </div>
-
 </fieldset>
 </form>
+<br><br><a href="layout.html">Vuelve a la pagina principal</a><br><br>
 </body>
 
 <?php
@@ -96,6 +93,7 @@ if(!mysqli_query($conn,$sql)){
 
 	}
 	else{ 
+		include "log.php";
 		echo "<a href='verPreguntas.php'>Ver Preguntas</a>";
 	}
 

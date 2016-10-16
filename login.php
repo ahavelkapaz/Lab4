@@ -2,7 +2,7 @@
 session_start();
 
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-		echo 'Hola ' . $_SESSION['user'] . '<br>';
+		echo 'Hola ' . $_SESSION['user'] . 'Sid= ' . session_id() . '! <br>';
 		echo '<a href="verPreguntas.php">Ver preguntas</a><br>';
 		echo '<a href="insertarPregunta.php">Registrar una nueva pregunta</a><br>';
 		echo '<a href="logout.php">Cerrar Sesion</a>';
@@ -53,7 +53,6 @@ require_once 'db_config.php';
 
 if(isset($_REQUEST['Uemail'])){
 	
-
 //Recibimos las dos variables
 $usuario=mysqli_real_escape_string($conn,$_REQUEST["Uemail"]);
 $password=mysqli_real_escape_string($conn,sha1($_REQUEST["Upassword"]));
@@ -65,15 +64,25 @@ if(mysqli_num_rows($users) > 0)
 {
 
     session_start();
- 
+	session_regenerate_id();
+	
 		$_SESSION['user']="$usuario";
 	    $_SESSION['loggedin'] = true;
 		$row = mysqli_fetch_array( $users);
-	    $_SESSION['rol'] = $row['rol'];
+	    $_SESSION['rol'] = $row['role'];
 	    $_SESSION['start'] = time();
 	    $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
-		
+		$_SESSION['sid']=session_id();
 		echo "Bienvenido! " . $_SESSION['user'];
+		
+		//log login connection
+		$time=date("Y-m-d H:i:s");
+		$sid=session_id();
+		$sql="INSERT into connections VALUES('$sid','$usuario','$time')";
+		if(!mysqli_query($conn,$sql)){
+		die('Error' . mysqli_error($conn));
+		}
+		
 		mysqli_close($conn); 
 		header("Location: insertarPregunta.php");
  
@@ -85,9 +94,12 @@ else
 
    $mensajeaccesoincorrecto = "El usuario o la contraseña son incorrectos, por favor vuelva a introducirlos.<br>";
    echo $mensajeaccesoincorrecto . '<a href="registro.html">Registrate</a><br>'; 
-   echo '<a href="layout.html">Pagina de Inicio</a>'; 
+   echo '<a href="layout.html">Vuelve a la pagina principal</a>'; 
 }
 
 mysqli_close($conn); 
 }
+
+
+		
 ?>

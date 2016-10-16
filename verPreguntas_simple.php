@@ -5,27 +5,27 @@
 
 
 <?php
-
 	require_once 'db_config.php';
+
+	
 	   
-	$sql="SELECT * FROM users";
+	$sql="SELECT * FROM quiz_questions";
 	$result = mysqli_query($conn,$sql);
 
 	if ($result) {
-		echo '<table class="table table-bordered" > <tr> <th>Nombre y apellidos</th><th>E-mail</th><th>Teléfono</th><th>Fecha de registro</th><th>Especialidad</th><th>Tecnologías y herramientas de interés</th><th>Role</th><th>Foto de perfil</th></td>';
+		echo '<table class="table table-bordered" > <tr><th>Id Pregunta:</th> <th>Email Id:</th><th>Pregunta</th><th>Respuesta</th><th>Puntuacion</th><th>Fecha Añadida</th></td>';
 		while ($row = mysqli_fetch_array( $result )) {
-			echo '<tr> <td>' . $row['name'] . '</td><td>' . $row['email'] . '</td><td>' . $row['phone'] . '</td><td>' . $row['date'] . '</td><td>' . $row['department'] . '</td><td>' . $row['tech_tools'] .'</td><td>'. $row['role'] .'</td>'; 
-			echo '<td><img src="data:image/jpeg;base64,' . base64_encode($row['avatar']) . '" /></td></tr>';
+			echo '<tr> <td>' . $row['id_quiz'] .'</td><td>' . $row['user_email'] . '</td><td>' . $row['quiz_question'] . '</td><td>' . $row['quiz_answer'] . '</td><td>' . $row['rate'] . '</td><td>' . $row['date'] .'</td>'; 
+
 
 		}
 		echo '</table>';
+		include "log.php";
 	}
 	else{
 		echo "Vacio";
 	}
 
 	mysqli_close($conn);
-	
-	echo '<br> <a href="layout.html">Vuelve a la página principal</a>'
 
 ?>

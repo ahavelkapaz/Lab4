@@ -5,7 +5,7 @@
 	$user_name = $_POST['nombre'];
 	$user_email = trim($_POST['email']);
 	$user_rol = htmlspecialchars($_POST['selectrol']);
-	$user_pass = trim($_POST['password']);//SHA1
+	$user_pass = trim($_POST['password']);
 	$user_phone = trim($_POST['telefono']);
 	$user_speciality = htmlspecialchars($_POST['selectoptions']);
 
@@ -26,9 +26,9 @@
 	if(!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*#?&]).{8,16}$/',$user_pass)){
 		die('La contraseña recibido no se ajusta al formato establecido. <br><br><a href="registro.html">Vuelve a registrarte</a>');
 	}
-	
+	$user_pass=sha1($user_pass);//Encriptamos SHA1
 
-	$user_pass=sha1($user_pass);
+	
 	
 	$image="";
     //Añadir imagen

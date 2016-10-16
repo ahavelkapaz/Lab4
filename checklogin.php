@@ -12,6 +12,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 	echo "Su sesion a terminado,
 	<a href='login.php'>Necesita Hacer Login</a><br>";
 	echo '<a href="layout.html">Pagina de Inicio</a>'; 
+	
+		header("Location: logout.php");
 	exit();
 	}
 } else {
